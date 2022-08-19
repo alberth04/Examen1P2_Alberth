@@ -3,7 +3,8 @@
  *
  * @author godoy
  */
-class Personaje {
+public class Personaje {
+
     private String nombre;
     private int vida;
     private int escudo;
@@ -19,7 +20,6 @@ class Personaje {
         this.arma = arma;
     }
 
-    
     public String getNombre() {
         return nombre;
     }
@@ -57,9 +57,4 @@ class Personaje {
         return "Personaje{" + "nombre=" + nombre + ", vida=" + vida + ", escudo=" + escudo + ", arma=" + arma + '}';
     }
 
-    
-
-    
-    
-    
 }

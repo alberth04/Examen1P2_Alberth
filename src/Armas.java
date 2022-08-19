@@ -3,7 +3,7 @@
  *
  * @author godoy
  */
-class Armas {
+public class Armas {
     private String nombre;
     private int damage;
     private int precision;

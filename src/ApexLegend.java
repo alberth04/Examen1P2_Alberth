@@ -26,21 +26,104 @@ public class ApexLegend extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFondo = new javax.swing.JPanel();
+        jLoginTitle = new javax.swing.JLabel();
+        jUsername_title = new javax.swing.JLabel();
+        jUserInput = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jPasswordInput = new javax.swing.JTextField();
+        jIngresar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jFondo.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLoginTitle.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
+        jLoginTitle.setText("LOGIN");
+
+        jUsername_title.setText("Usuario");
+
+        jUserInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jUserInputActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Contraseña");
+
+        jIngresar.setText("Ingresar");
+        jIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jIngresarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jFondoLayout = new javax.swing.GroupLayout(jFondo);
+        jFondo.setLayout(jFondoLayout);
+        jFondoLayout.setHorizontalGroup(
+            jFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFondoLayout.createSequentialGroup()
+                .addGroup(jFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jFondoLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLoginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jFondoLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jUserInput, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jUsername_title, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jFondoLayout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+        jFondoLayout.setVerticalGroup(
+            jFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFondoLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLoginTitle)
+                .addGap(18, 18, 18)
+                .addComponent(jUsername_title)
+                .addGap(18, 18, 18)
+                .addComponent(jUserInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jIngresar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jUserInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUserInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jUserInputActionPerformed
+
+    private void jIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIngresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jIngresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +161,12 @@ public class ApexLegend extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jFondo;
+    private javax.swing.JButton jIngresar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLoginTitle;
+    private javax.swing.JTextField jPasswordInput;
+    private javax.swing.JTextField jUserInput;
+    private javax.swing.JLabel jUsername_title;
     // End of variables declaration//GEN-END:variables
 }
