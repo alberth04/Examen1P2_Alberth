@@ -1,20 +1,27 @@
+
+import java.util.Random;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author godoy
  */
-public class ApexLegend extends javax.swing.JFrame {
+public class Login_Apex extends javax.swing.JFrame {
+
+    static ApexLegends a = new ApexLegends();
 
     /**
      * Creates new form ApexLegend
      */
-    public ApexLegend() {
+    public Login_Apex() {
         initComponents();
+
     }
 
     /**
@@ -35,6 +42,7 @@ public class ApexLegend extends javax.swing.JFrame {
         jIngresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jFondo.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -52,6 +60,11 @@ public class ApexLegend extends javax.swing.JFrame {
         jLabel1.setText("Contraseña");
 
         jIngresar.setText("Ingresar");
+        jIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jIngresarMouseClicked(evt);
+            }
+        });
         jIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jIngresarActionPerformed(evt);
@@ -75,8 +88,8 @@ public class ApexLegend extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jFondoLayout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(68, 68, 68)
+                        .addComponent(jIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         jFondoLayout.setVerticalGroup(
@@ -92,27 +105,12 @@ public class ApexLegend extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jIngresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
-        );
+        getContentPane().add(jFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 6, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -124,6 +122,32 @@ public class ApexLegend extends javax.swing.JFrame {
     private void jIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIngresarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jIngresarActionPerformed
+
+    private void jIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jIngresarMouseClicked
+
+        DefaultComboBoxModel lista = a.getListaJugadores();
+        Random rnd = new Random();
+        String nombre = jUserInput.getText();
+        String password = jPasswordInput.getText();
+        try {
+            if (((Jugadores)lista.getElementAt(0)).getNombreUsuario().equalsIgnoreCase(nombre) &&((Jugadores)lista.getElementAt(0)).getPassword().equalsIgnoreCase(password) ||
+                  ((Jugadores)lista.getElementAt(1)).getNombreUsuario().equalsIgnoreCase(nombre) &&((Jugadores)lista.getElementAt(1)).getPassword().equalsIgnoreCase(password)||
+                    ((Jugadores)lista.getElementAt(2)).getNombreUsuario().equalsIgnoreCase(nombre) &&((Jugadores)lista.getElementAt(2)).getPassword().equalsIgnoreCase(password) ) {
+                JOptionPane.showConfirmDialog(this, "Bienvenido");
+                a.setVisible(true);
+            } else {
+                lista.addElement(new Jugadores(nombre, idGenerator(), password, new Fortaleza("Prota", 100, 50, new Armas("Escalibur", 100, 100))));
+                JOptionPane.showConfirmDialog(this, "Bienvenido nuevo usuario");
+                a.setVisible(true);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, "Ocurrio un error");
+        }
+        
+
+    }//GEN-LAST:event_jIngresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -142,22 +166,47 @@ public class ApexLegend extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ApexLegend.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_Apex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ApexLegend.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_Apex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ApexLegend.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_Apex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ApexLegend.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_Apex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ApexLegend().setVisible(true);
+                new Login_Apex().setVisible(true);
+
             }
         });
+    }
+
+    public static int idGenerator() {
+        Random rnd = new Random();
+        int id = rnd.nextInt(1000);
+        boolean centinela = false;
+        while (centinela == true) {
+            int cont = 0;
+            DefaultComboBoxModel lista = a.getListaJugadores();
+            for (int i = 0; i < lista.getSize(); i++) {
+                if (lista.getElementAt(i) instanceof Jugadores) {
+                    if (((Jugadores) lista.getElementAt(i)).getID() == id) {
+                        cont++;
+                    }
+                }
+            }
+            if (cont > 0) {
+                id = rnd.nextInt();
+            } else {
+                centinela = true;
+            }
+        }
+        return id;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -169,4 +218,5 @@ public class ApexLegend extends javax.swing.JFrame {
     private javax.swing.JTextField jUserInput;
     private javax.swing.JLabel jUsername_title;
     // End of variables declaration//GEN-END:variables
+
 }

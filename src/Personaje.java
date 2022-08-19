@@ -54,7 +54,7 @@ public class Personaje {
 
     @Override
     public String toString() {
-        return "Personaje{" + "nombre=" + nombre + ", vida=" + vida + ", escudo=" + escudo + ", arma=" + arma + '}';
+        return String.format("%s %s %s %s", nombre, vida, escudo, arma);
     }
 
 }

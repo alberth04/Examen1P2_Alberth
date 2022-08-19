@@ -16,6 +16,12 @@ public class Jugadores {
         this.personaje = personaje;
     }
 
+    public Jugadores(String nombreUsuario, int ID, String password) {
+        this.nombreUsuario = nombreUsuario;
+        this.ID = ID;
+        this.password = password;
+    }
+    
     public Jugadores() {
     }
 

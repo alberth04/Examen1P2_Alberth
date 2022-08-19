@@ -4,6 +4,7 @@
  * @author godoy
  */
 public class Armas {
+
     private String nombre;
     private int damage;
     private int precision;
@@ -40,6 +41,10 @@ public class Armas {
     public void setPrecision(int precision) {
         this.precision = precision;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return String.format("Armas: %s Daño %s Precision %s", nombre, damage, precision);
+    }
+
 }
