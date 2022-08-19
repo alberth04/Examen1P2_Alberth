@@ -9,10 +9,10 @@ public class Armas {
     private int damage;
     private int precision;
 
-    public Armas(String nombre, int damage, int precision) {
+    public Armas(String nombre, int damage, int precision)throws Exception{
         this.nombre = nombre;
         this.damage = damage;
-        this.precision = precision;
+        setPrecision(precision);
     }
 
     public Armas() {
@@ -38,8 +38,13 @@ public class Armas {
         return precision;
     }
 
-    public void setPrecision(int precision) {
-        this.precision = precision;
+    public void setPrecision(int precision) throws Exception {
+        if (precision >= 0 && precision < 101) {
+            this.precision = precision;
+        } else {
+            throw new Exception("Fuera del rango");
+        }
+
     }
 
     @Override

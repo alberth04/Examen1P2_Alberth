@@ -136,7 +136,7 @@ public class Login_Apex extends javax.swing.JFrame {
                 JOptionPane.showConfirmDialog(this, "Bienvenido");
                 a.setVisible(true);
             } else {
-                lista.addElement(new Jugadores(nombre, idGenerator(), password, new Fortaleza("Prota", 100, 50, new Armas("Escalibur", 100, 100))));
+                lista.addElement(new Jugadores(nombre, idGenerator(), password,a.darPersonaje()));
                 JOptionPane.showConfirmDialog(this, "Bienvenido nuevo usuario");
                 a.setVisible(true);
             }
