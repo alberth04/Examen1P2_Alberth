@@ -14,5 +14,18 @@ public class Rastreador extends Personaje{
     public String toString() {
         return String.format("Rastreador: %s",super.toString());
     }
+    @Override
+    public String nombre(){
+        return "Rastreador";
+    }
+
+    @Override
+    public void atacar(Jugadores e) {
+       
+    }
+
+    
+
+    
     
 }

@@ -1,4 +1,7 @@
 
+import java.awt.List;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -27,7 +30,7 @@ public class ApexLegends extends javax.swing.JFrame {
             this.listaPersonajes.addElement(new Medico("LifeLine", 100, 50, new Armas("Flatline", 10, 80)));
             this.listaPersonajes.addElement(new Rastreador("Vantage", 100, 50, new Armas("PeaceFinder", 30, 40)));
             this.listaPersonajes.addElement(new Fortaleza("Gibby", 125, 75, new Armas("Carabina", 15, 90)));
-            
+
         } catch (Exception e) {
         }
 
@@ -59,6 +62,83 @@ public class ApexLegends extends javax.swing.JFrame {
         return (Personaje) listaPersonajes.getElementAt(rnd.nextInt(3));
     }
 
+    public void crearPersonajes() {
+        for (int i = 1; i < 57; i++) {
+            listaJugadores.addElement(new Jugadores(usuarioRandom(), idGenerator(), usuarioRandom(), darPersonaje()));
+        }
+    }
+
+    public String usuarioRandom() {
+        Random rnd = new Random();
+        int repetir = 5;
+        String usuario = "";
+
+        while (repetir >= 0) {
+            int numRandom = rnd.nextInt(122 - 97 + 1) + 97;
+
+            char caracter = (char) numRandom;
+            usuario += caracter;
+            repetir--;
+        }
+
+        return usuario;
+    }
+
+    public int idGenerator() {
+        Random rnd = new Random();
+        int id = rnd.nextInt(1000);
+        boolean centinela = false;
+        while (centinela == true) {
+            int cont = 0;
+            for (int i = 0; i < listaJugadores.getSize(); i++) {
+                if (listaJugadores.getElementAt(i) instanceof Jugadores) {
+                    if (((Jugadores) listaJugadores.getElementAt(i)).getID() == id) {
+                        cont++;
+                    }
+                }
+            }
+            if (cont > 0) {
+                id = rnd.nextInt();
+            } else {
+                centinela = true;
+            }
+        }
+        return id;
+    }
+
+    public int busquedaBinaria(int numAtacar, int mitad) {
+        for (int i = 0; i < listaJugadores.getSize(); i++) {
+            if (((Jugadores) listaJugadores.getElementAt(i)).getID() == numAtacar) {
+                return listaJugadores.getIndexOf(i);
+            } else {
+
+            }
+        }
+        return 1;
+    }
+
+    public void ordenarCombobox() {
+        int maximo=0;
+        for (int i = 0; i < listaJugadores.getSize(); i++) {
+            int max = ((Jugadores) listaJugadores.getElementAt(0)).getID();
+            maximo = Math.max(((Jugadores)listaJugadores.getElementAt(i)).getID(),max);
+            
+        }
+        for (int i = 0; i < listaJugadores.getSize(); i++) {
+            ((Jugadores) listaJugadores.getElementAt(i)).getID();
+        }
+    }
+    
+    public int sinRecursiva(int numId){
+        for (int i = 0; i < listaJugadores.getSize(); i++) {
+            if (((Jugadores)listaJugadores.getElementAt(i)).getID() == numId) {
+                return listaJugadores.getIndexOf(i);
+               
+            }
+        }
+        return -1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,11 +155,11 @@ public class ApexLegends extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jRestantesTittle = new javax.swing.JLabel();
+        jAttackField = new javax.swing.JTextField();
+        jAtttackButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jJugadoresTabla = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -141,21 +221,31 @@ public class ApexLegends extends javax.swing.JFrame {
         jTabbedPane1.addTab("Seleccionar", jPanel1);
 
         jButton2.setText("Comenzar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Restantes: ");
+        jRestantesTittle.setText("Restantes: ");
 
-        jTextField1.setText("jTextField1");
+        jAttackField.setText("jTextField1");
 
-        jButton3.setText("Atacar");
+        jAtttackButton.setText("Atacar");
+        jAtttackButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jAtttackButtonMouseClicked(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        jJugadoresTabla.setColumns(20);
+        jJugadoresTabla.setRows(5);
+        jScrollPane2.setViewportView(jJugadoresTabla);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -168,12 +258,12 @@ public class ApexLegends extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jRestantesTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(89, 89, 89))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jAttackField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jAtttackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(255, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -182,13 +272,13 @@ public class ApexLegends extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jRestantesTittle))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jAttackField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jAtttackButton))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -240,14 +330,14 @@ public class ApexLegends extends javax.swing.JFrame {
 
         jPrecision.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
 
-        jFortaleza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fortaleza", "Medico", "Rastreador", " " }));
+        jFortaleza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fortaleza", "Medico", "Rastreador" }));
         jFortaleza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFortalezaActionPerformed(evt);
             }
         });
 
-        jVidaPersonaje.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jVidaPersonaje.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jDamageInput.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
         jDamageInput.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -409,7 +499,7 @@ public class ApexLegends extends javax.swing.JFrame {
             int damage = Integer.parseInt(jDamageInput.getText());
             int precision = Integer.parseInt(jPrecision.getText());
             this.arma = new Armas(nombre, damage, precision);
-             JOptionPane.showMessageDialog(this, "Arma Creada");
+            JOptionPane.showMessageDialog(this, "Arma Creada");
             jDamageInput.setText("");
             jPrecision.setText("");
             jNombreInput.setText("");
@@ -417,7 +507,7 @@ public class ApexLegends extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Algo salio mal");
 
         }
-        
+
 
     }//GEN-LAST:event_jCrearArma_ButtonMouseClicked
 
@@ -427,11 +517,66 @@ public class ApexLegends extends javax.swing.JFrame {
 
     private void jCrearPersonaje_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCrearPersonaje_ButtonMouseClicked
         try {
-            String nombre = jNombreJugador.getText();
+            if (!arma.getNombre().equalsIgnoreCase(null)) {
+
+                String nombre = jNombreJugador.getText();
+                int vida = Integer.parseInt(jVidaPersonaje.getText());
+                int escudo = Integer.parseInt(jVidaPersonaje.getText());
+                int fortaleza = jFortaleza.getSelectedIndex();
+                JOptionPane.showMessageDialog(this, fortaleza);
+                switch (fortaleza) {
+                    case 0:
+                        listaPersonajes.addElement(new Fortaleza(nombre, vida, escudo, arma));
+                        JOptionPane.showMessageDialog(this, "Personaje Creado");
+                        jListaPersonajes.setModel(listaPersonajes);
+                        break;
+                    case 1:
+                        listaPersonajes.addElement(new Medico(nombre, vida, escudo, arma));
+                        JOptionPane.showMessageDialog(this, "Personaje Creado");
+                        jListaPersonajes.setModel(listaPersonajes);
+                        break;
+                    case 2:
+                        listaPersonajes.addElement(new Rastreador(nombre, vida, escudo, arma));
+                        JOptionPane.showMessageDialog(this, "Personaje Creado");
+                        jListaPersonajes.setModel(listaPersonajes);
+                        break;
+                    default:
+                        break;
+                }
+                jNombreJugador.setText("");
+                jVidaPersonaje.setText("");
+                jEscudoPersonaje.setText("");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Ingrese un arma primero");
+            }
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Algo salio mal");
+            JOptionPane.showMessageDialog(this, e.getMessage());
+
         }
+
     }//GEN-LAST:event_jCrearPersonaje_ButtonMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        crearPersonajes();
+        jRestantesTittle.setText(String.format("Restantes: %s", listaJugadores.getSize()));
+        String message = "";
+        for (int i = 0; i < listaJugadores.getSize(); i++) {
+            message += String.format("%s%n", listaJugadores.getElementAt(i));
+        }
+        jJugadoresTabla.setText(message);
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jAtttackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAtttackButtonMouseClicked
+        int numID = Integer.parseInt(jAttackField.getText());
+        if (sinRecursiva(numID)==-1) {
+            JOptionPane.showMessageDialog(this, "No existe al que quiere atacar");
+        } else {
+            
+        }
+        
+    }//GEN-LAST:event_jAtttackButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -470,18 +615,19 @@ public class ApexLegends extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jArma;
+    private javax.swing.JTextField jAttackField;
+    private javax.swing.JButton jAtttackButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jCrearArma_Button;
     private javax.swing.JButton jCrearPersonaje_Button;
     private javax.swing.JFormattedTextField jDamageInput;
     private javax.swing.JFormattedTextField jEscudoPersonaje;
     private javax.swing.JComboBox<String> jFortaleza;
+    private javax.swing.JTextArea jJugadoresTabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -496,10 +642,9 @@ public class ApexLegends extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JFormattedTextField jPrecision;
+    private javax.swing.JLabel jRestantesTittle;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JFormattedTextField jVidaPersonaje;
     // End of variables declaration//GEN-END:variables
 }

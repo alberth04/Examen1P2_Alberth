@@ -13,5 +13,17 @@ public class Medico extends Personaje{
     public String toString() {
         return String.format("Medico: %s",super.toString());
     }
+    @Override
+    public String nombre(){
+        return "Medico";
+    }
+
+    @Override
+    public void atacar(Jugadores e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
+
+   
 }

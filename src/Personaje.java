@@ -56,5 +56,17 @@ public class Personaje {
     public String toString() {
         return String.format("%s %s %s %s", nombre, vida, escudo, arma);
     }
+    public String nombre(){
+        return "";
+    }
+   
+    public void atacar(Jugadores atacante){
+        
+    }
+    
+    public void extraDamage(Jugadores jugadorAtaque, Jugadores defensor){
+        
+    }
+
 
 }
